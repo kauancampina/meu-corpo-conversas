@@ -249,6 +249,19 @@ function Index() {
         </div>
       </section>
 
+      <section className="expert section-pad" id="quem-criou">
+        <div className="expert-inner">
+          <div className="expert-photo">
+            <img src={paulaImage} alt="Paula Rocha, criadora do material Roda de Conversa: Meu Corpo é Meu" width={440} height={440} />
+          </div>
+          <div className="expert-copy">
+            <span className="kicker">Quem criou este material</span>
+            <h2>Paula Rocha</h2>
+            <p>Oi, eu sou a Paula Rocha, professora pedagógica com mais de 10 anos de experiência trabalhando com crianças. Ao longo dessa trajetória, percebi que alguns assuntos importantes, como corpo, limites, respeito e segurança, nem sempre são fáceis de conversar com uma criança. Por isso criei a Roda de Conversa: Meu Corpo é Meu, um material visual e interativo que ajuda mães, pais e educadores a conduzirem essas conversas de forma leve, lúdica e adequada à infância. Meu objetivo é tornar mais simples começar essa conversa e ajudar a criança a compreender seus próprios limites de uma maneira natural e acolhedora.</p>
+          </div>
+        </div>
+      </section>
+
       <section className="guarantee section-pad"><div className="guarantee-seal"><ShieldCheck /><strong>7</strong><span>dias de<br />garantia</span></div><div><span className="kicker">Seu risco é zero</span><h2>Conheça o material por 7 dias.</h2><p>Explore as cartas, leia o guia e experimente as atividades. Se por qualquer motivo você sentir que o material não é para você, é só solicitar o reembolso dentro de 7 dias. Simples assim.</p></div></section>
 
       <section className="faq section-pad" id="faq"><div className="section-heading narrow"><span className="kicker">Perguntas frequentes</span><h2>Ainda ficou alguma dúvida?</h2></div><div className="faq-list">{faqs.map(([question, answer], i) => <details key={question} open={i === 0}><summary>{question}<ChevronDown /></summary><p>{answer}</p></details>)}</div></section>

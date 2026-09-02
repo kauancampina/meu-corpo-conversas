@@ -19,8 +19,10 @@ import {
 } from "lucide-react";
 
 import kitImageAsset from "@/assets/foto-do-produto.png.asset.json";
+import paulaAsset from "@/assets/paula-rocha.png.asset.json";
 
 const kitImage = kitImageAsset.url;
+const paulaImage = paulaAsset.url;
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -244,6 +246,19 @@ function Index() {
         <div className="pricing-grid">
           <article className="plan basic"><div><span className="plan-type">Material essencial</span><h3>Kit Básico</h3><p>Para dar o primeiro passo com clareza.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> Material pronto para imprimir</li><li><Check /> Cartas e perguntas</li></ul><div className="not-included" aria-label="Não incluído no Kit Básico"><span><X /> 500 Atividades Pedagógicas</span><span><X /> Cartilha Educativa</span><span><X /> Moldes de Brincadeiras Sensoriais</span><span><X /> Bônus exclusivos</span></div><div className="price"><small>Pagamento único</small><span><sup>R$</sup>9<sup>,99</sup></span></div><OfferButton onClick={buy} secondary>Quero o Kit Básico</OfferButton><div className="secure"><span><ShieldCheck /> Compra segura</span><span><Zap /> Acesso imediato</span></div></article>
           <article className="plan complete"><div className="popular">Mais escolhido</div><div><span className="plan-type">Experiência completa</span><h3>Kit Completo</h3><p>Por apenas R$10 a mais, você leva todo o Kit Completo.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> 500 Atividades Pedagógicas</li><li><Check /> Cartilha Educativa</li><li><Check /> Moldes de Brincadeiras Sensoriais</li><li><Check /> Materiais organizados para facilitar a utilização</li><li><Check /> Bônus exclusivos do Kit Completo</li></ul><div className="price"><small>Tudo por</small><span><sup>R$</sup>19<sup>,99</sup></span><em>TUDO POR R$19,99 — pagamento único</em></div><OfferButton onClick={buy}>Quero o Kit Completo</OfferButton><div className="secure"><span><ShieldCheck /> Compra segura</span><span><Zap /> Acesso imediato</span></div></article>
+        </div>
+      </section>
+
+      <section className="expert section-pad" id="quem-criou">
+        <div className="expert-inner">
+          <div className="expert-photo">
+            <img src={paulaImage} alt="Paula Rocha, criadora do material Roda de Conversa: Meu Corpo é Meu" width={440} height={440} />
+          </div>
+          <div className="expert-copy">
+            <span className="kicker">Quem criou este material</span>
+            <h2>Paula Rocha</h2>
+            <p>Oi, eu sou a Paula Rocha, professora pedagógica com mais de 10 anos de experiência trabalhando com crianças. Ao longo dessa trajetória, percebi que alguns assuntos importantes, como corpo, limites, respeito e segurança, nem sempre são fáceis de conversar com uma criança. Por isso criei a Roda de Conversa: Meu Corpo é Meu, um material visual e interativo que ajuda mães, pais e educadores a conduzirem essas conversas de forma leve, lúdica e adequada à infância. Meu objetivo é tornar mais simples começar essa conversa e ajudar a criança a compreender seus próprios limites de uma maneira natural e acolhedora.</p>
+          </div>
         </div>
       </section>
 

@@ -19,8 +19,10 @@ import {
 } from "lucide-react";
 
 import kitImageAsset from "@/assets/foto-do-produto.png.asset.json";
+import paulaAsset from "@/assets/paula-rocha.png.asset.json";
 
 const kitImage = kitImageAsset.url;
+const paulaImage = paulaAsset.url;
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

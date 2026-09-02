@@ -184,6 +184,12 @@ function OfferButton({
 function Index() {
   const [exitOpen, setExitOpen] = useState(false);
 
+  // Garante que a página sempre inicie no topo (sem restauração de scroll do navegador)
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
+    if (!window.location.hash) window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+  }, []);
+
   useEffect(() => {
     let armed = false;
     const arm = window.setTimeout(() => { armed = true; }, 7000);

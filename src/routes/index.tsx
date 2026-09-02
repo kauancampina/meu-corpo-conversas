@@ -14,7 +14,8 @@ import {
   ShieldCheck,
   Sparkles,
   Star,
-  Users,
+  X,
+  Zap,
 } from "lucide-react";
 
 import kitImageAsset from "@/assets/foto-do-produto.png.asset.json";
@@ -82,10 +83,57 @@ function Countdown() {
   const sec = String(seconds % 60).padStart(2, "0");
   return (
     <div className="countdown" aria-label={`Oferta termina em ${min} minutos e ${sec} segundos`}>
+      <div className="countdown-inner">
       <Clock3 aria-hidden="true" />
-      <span>Condição especial por</span>
+      <span>Condição especial termina em</span>
       <strong>{min}:{sec}</strong>
+      </div>
     </div>
+  );
+}
+
+const purchaseActivity = [
+  ["Mariana S.", "São Paulo"],
+  ["Camila R.", "Belo Horizonte"],
+  ["Juliana M.", "Curitiba"],
+  ["Patrícia A.", "Salvador"],
+  ["Renata C.", "Recife"],
+  ["Fernanda L.", "Goiânia"],
+];
+
+function PurchaseActivity() {
+  const [visible, setVisible] = useState(false);
+  const [activityIndex, setActivityIndex] = useState(0);
+
+  useEffect(() => {
+    const showFirst = window.setTimeout(() => setVisible(true), 3000);
+    const rotate = window.setInterval(() => {
+      setActivityIndex((current) => (current + 1) % purchaseActivity.length);
+      setVisible(true);
+    }, 10000);
+    return () => {
+      window.clearTimeout(showFirst);
+      window.clearInterval(rotate);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+    const hide = window.setTimeout(() => setVisible(false), 6000);
+    return () => window.clearTimeout(hide);
+  }, [visible, activityIndex]);
+
+  const activity = purchaseActivity[activityIndex];
+  if (!visible || !activity) return null;
+
+  return (
+    <aside className="purchase-toast" aria-live="polite">
+      <span className="purchase-toast-icon"><CircleCheck aria-hidden="true" /></span>
+      <p><strong>{activity[0]}</strong>, de {activity[1]}, acabou de adquirir o <b>Kit Completo</b>.</p>
+      <Button variant="ghost" size="icon" onClick={() => setVisible(false)} aria-label="Fechar notificação">
+        <X aria-hidden="true" />
+      </Button>
+    </aside>
   );
 }
 
@@ -118,23 +166,11 @@ function Index() {
 
   return (
     <main>
-      <header className="site-header">
-        <a href="#inicio" className="brand" aria-label="Meu Corpo é Meu — início">
-          <span className="brand-mark"><Heart /></span>
-          <span>MEU CORPO<br /><b>É MEU</b></span>
-        </a>
-        <nav aria-label="Navegação principal">
-          <a href="#conteudo">O que você recebe</a>
-          <a href="#depoimentos">Depoimentos</a>
-          <a href="#faq">Dúvidas</a>
-        </nav>
-        <Button asChild className="header-cta"><a href="#oferta">Quero o material</a></Button>
-      </header>
+      <Countdown />
 
       <section className="hero" id="inicio">
         <div className="hero-copy">
           <div className="eyebrow"><Sparkles /> Educação que protege, conversa que aproxima</div>
-          <Countdown />
           <h1>Ensine sobre corpo e limites <em>sem medo e sem constrangimento.</em></h1>
           <p className="hero-lead">Um material acolhedor e pronto para usar, que ajuda você a conduzir conversas essenciais sobre respeito, consentimento e proteção com a leveza que a infância merece.</p>
           <div className="hero-actions">
@@ -206,8 +242,8 @@ function Index() {
       <section className="pricing section-pad" id="oferta">
         <div className="section-heading"><span className="kicker">Escolha como começar</span><h2>Invista hoje em conversas que protegem para sempre.</h2><p>Mais materiais. Mais possibilidades. Um único investimento.</p></div>
         <div className="pricing-grid">
-          <article className="plan basic"><div><span className="plan-type">Material essencial</span><h3>Kit Básico</h3><p>Para dar o primeiro passo com clareza.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> Material pronto para imprimir</li><li><Check /> Cartas e perguntas</li><li><Check /> Atividades para aplicação</li><li><Check /> Orientações de uso</li></ul><div className="price"><small>Pagamento único</small><span><sup>R$</sup>9<sup>,99</sup></span></div><OfferButton onClick={buy} secondary>Quero o Kit Básico</OfferButton></article>
-          <article className="plan complete"><div className="popular">Mais escolhido</div><div><span className="plan-type">Experiência completa</span><h3>Kit Completo</h3><p>Por apenas R$10 a mais, você leva todo o Kit Completo.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> 500 Atividades Pedagógicas</li><li><Check /> Cartilha Educativa</li><li><Check /> Moldes de Brincadeiras Sensoriais</li><li><Check /> Materiais organizados para facilitar a utilização</li><li><Check /> Bônus exclusivos do Kit Completo</li></ul><div className="price"><small>Tudo por</small><span><sup>R$</sup>19<sup>,99</sup></span><em>TUDO POR R$19,99 — pagamento único</em></div><OfferButton onClick={buy}>Quero o Kit Completo</OfferButton><small className="secure"><ShieldCheck /> Compra segura • acesso imediato</small></article>
+          <article className="plan basic"><div><span className="plan-type">Material essencial</span><h3>Kit Básico</h3><p>Para dar o primeiro passo com clareza.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> Material pronto para imprimir</li><li><Check /> Cartas e perguntas</li></ul><div className="not-included" aria-label="Não incluído no Kit Básico"><span><X /> 500 Atividades Pedagógicas</span><span><X /> Cartilha Educativa</span><span><X /> Moldes de Brincadeiras Sensoriais</span><span><X /> Bônus exclusivos</span></div><div className="price"><small>Pagamento único</small><span><sup>R$</sup>9<sup>,99</sup></span></div><OfferButton onClick={buy} secondary>Quero o Kit Básico</OfferButton><div className="secure"><span><ShieldCheck /> Compra segura</span><span><Zap /> Acesso imediato</span></div></article>
+          <article className="plan complete"><div className="popular">Mais escolhido</div><div><span className="plan-type">Experiência completa</span><h3>Kit Completo</h3><p>Por apenas R$10 a mais, você leva todo o Kit Completo.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> 500 Atividades Pedagógicas</li><li><Check /> Cartilha Educativa</li><li><Check /> Moldes de Brincadeiras Sensoriais</li><li><Check /> Materiais organizados para facilitar a utilização</li><li><Check /> Bônus exclusivos do Kit Completo</li></ul><div className="price"><small>Tudo por</small><span><sup>R$</sup>19<sup>,99</sup></span><em>TUDO POR R$19,99 — pagamento único</em></div><OfferButton onClick={buy}>Quero o Kit Completo</OfferButton><div className="secure"><span><ShieldCheck /> Compra segura</span><span><Zap /> Acesso imediato</span></div></article>
         </div>
       </section>
 
@@ -218,6 +254,8 @@ function Index() {
       <section className="final-cta section-pad"><Heart /><span className="kicker">Uma conversa pode mudar tudo</span><h2>Dê à criança palavras para reconhecer seus limites — e confiança para pedir ajuda.</h2><p>Comece hoje, no ritmo de vocês, com um material feito para acolher e proteger.</p><OfferButton>Quero começar essa conversa</OfferButton><small><ShieldCheck /> 7 dias de garantia • acesso imediato</small></section>
 
       <footer className="footer"><div className="brand"><span className="brand-mark"><Heart /></span><span>MEU CORPO<br /><b>É MEU</b></span></div><p>© 2026 Meu Corpo é Meu. Todos os direitos reservados.</p><div><a href="#faq">Dúvidas</a><a href="#oferta">Comprar</a></div></footer>
+
+      <PurchaseActivity />
 
       <Dialog open={exitOpen} onOpenChange={setExitOpen}><DialogContent className="promo-dialog"><span className="dialog-icon"><Heart /></span><DialogTitle>Antes de ir…</DialogTitle><DialogDescription>Leve agora o Kit Completo com os 3 bônus e comece essa conversa com mais segurança.</DialogDescription><div className="dialog-offer"><span>Condição desta página</span><strong>Kit Completo por R$ 19,99</strong></div><DialogClose asChild><Button asChild className="cta-button"><a href="#oferta">Ver a oferta completa <ArrowRight /></a></Button></DialogClose><DialogClose asChild><Button variant="ghost">Agora não</Button></DialogClose></DialogContent></Dialog>
 

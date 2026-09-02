@@ -54,7 +54,7 @@ const pains = [
   "A criança muda de assunto — e você não sabe como tornar o momento natural.",
 ];
 
-const testimonials = [
+const testimonials: Array<[string, string, string]> = [
   ["Mariana S.", "Mãe de duas crianças", "Finalmente consegui conversar sem transformar o assunto em uma palestra. As cartas deixaram tudo leve e espontâneo."],
   ["Camila R.", "Professora da Educação Infantil", "Usei em roda com a turma e me surpreendi com a qualidade das conversas. O material dá segurança para mediar."],
   ["Renata M.", "Psicóloga infantil", "Cuidadoso, direto e respeitoso com cada fase. É o tipo de recurso que aproxima os adultos das crianças."],

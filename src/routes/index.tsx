@@ -17,7 +17,9 @@ import {
   Users,
 } from "lucide-react";
 
-import kitImage from "@/assets/meu-corpo-kit.png";
+import kitImageAsset from "@/assets/foto-do-produto.png.asset.json";
+
+const kitImage = kitImageAsset.url;
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -146,7 +148,7 @@ function Index() {
         </div>
         <div className="hero-visual">
           <div className="image-backdrop" />
-          <img src={kitImage} alt="Livro Meu Corpo é Meu e cartas para roda de conversa" width={1200} height={1104} />
+          <img src={kitImage} alt="Embalagem do kit Roda de Conversa — Meu Corpo é Meu" width={1536} height={1024} />
           <div className="floating-note"><span>PDF + cartas</span><strong>Pronto para imprimir</strong></div>
         </div>
       </section>
@@ -202,10 +204,10 @@ function Index() {
       </section>
 
       <section className="pricing section-pad" id="oferta">
-        <div className="section-heading"><span className="kicker">Escolha como começar</span><h2>Invista hoje em conversas que protegem para sempre.</h2></div>
+        <div className="section-heading"><span className="kicker">Escolha como começar</span><h2>Invista hoje em conversas que protegem para sempre.</h2><p>Mais materiais. Mais possibilidades. Um único investimento.</p></div>
         <div className="pricing-grid">
-          <article className="plan basic"><div><span className="plan-type">Material essencial</span><h3>Kit Básico</h3><p>Para dar o primeiro passo com clareza.</p></div><ul><li><Check /> Guia do adulto</li><li><Check /> 36 cartas de conversa</li><li><Check /> Atividades práticas</li><li className="disabled"><Check /> 3 materiais bônus</li></ul><div className="price"><small>Pagamento único</small><span><sup>R$</sup>37<sup>,00</sup></span></div><OfferButton onClick={buy} secondary>Quero o Kit Básico</OfferButton></article>
-          <article className="plan complete"><div className="popular">Mais escolhido</div><div><span className="plan-type">Experiência completa</span><h3>Kit Completo</h3><p>Todos os recursos para aprofundar a proteção.</p></div><ul><li><Check /> Guia do adulto</li><li><Check /> 36 cartas de conversa</li><li><Check /> Atividades práticas</li><li><Check /> Cartaz Rede de Confiança</li><li><Check /> Semáforo do Toque</li><li><Check /> Mini guia de respostas</li></ul><div className="price"><small>De R$ 130 por apenas</small><span><sup>R$</sup>57<sup>,00</sup></span><em>ou 6x de R$ 10,35</em></div><OfferButton onClick={buy}>Quero o Kit Completo</OfferButton><small className="secure"><ShieldCheck /> Compra segura • acesso imediato</small></article>
+          <article className="plan basic"><div><span className="plan-type">Material essencial</span><h3>Kit Básico</h3><p>Para dar o primeiro passo com clareza.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> Material pronto para imprimir</li><li><Check /> Cartas e perguntas</li><li><Check /> Atividades para aplicação</li><li><Check /> Orientações de uso</li></ul><div className="price"><small>Pagamento único</small><span><sup>R$</sup>9<sup>,99</sup></span></div><OfferButton onClick={buy} secondary>Quero o Kit Básico</OfferButton></article>
+          <article className="plan complete"><div className="popular">Mais escolhido</div><div><span className="plan-type">Experiência completa</span><h3>Kit Completo</h3><p>Por apenas R$10 a mais, você leva todo o Kit Completo.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> 500 Atividades Pedagógicas</li><li><Check /> Cartilha Educativa</li><li><Check /> Moldes de Brincadeiras Sensoriais</li><li><Check /> Materiais organizados para facilitar a utilização</li><li><Check /> Bônus exclusivos do Kit Completo</li></ul><div className="price"><small>Tudo por</small><span><sup>R$</sup>19<sup>,99</sup></span><em>TUDO POR R$19,99 — pagamento único</em></div><OfferButton onClick={buy}>Quero o Kit Completo</OfferButton><small className="secure"><ShieldCheck /> Compra segura • acesso imediato</small></article>
         </div>
       </section>
 
@@ -217,9 +219,9 @@ function Index() {
 
       <footer className="footer"><div className="brand"><span className="brand-mark"><Heart /></span><span>MEU CORPO<br /><b>É MEU</b></span></div><p>© 2026 Meu Corpo é Meu. Todos os direitos reservados.</p><div><a href="#faq">Dúvidas</a><a href="#oferta">Comprar</a></div></footer>
 
-      <Dialog open={exitOpen} onOpenChange={setExitOpen}><DialogContent className="promo-dialog"><span className="dialog-icon"><Heart /></span><DialogTitle>Antes de ir…</DialogTitle><DialogDescription>Leve agora o Kit Completo com os 3 bônus e comece essa conversa com mais segurança.</DialogDescription><div className="dialog-offer"><span>Condição desta página</span><strong>Kit Completo por R$ 57</strong></div><DialogClose asChild><Button asChild className="cta-button"><a href="#oferta">Ver a oferta completa <ArrowRight /></a></Button></DialogClose><DialogClose asChild><Button variant="ghost">Agora não</Button></DialogClose></DialogContent></Dialog>
+      <Dialog open={exitOpen} onOpenChange={setExitOpen}><DialogContent className="promo-dialog"><span className="dialog-icon"><Heart /></span><DialogTitle>Antes de ir…</DialogTitle><DialogDescription>Leve agora o Kit Completo com os 3 bônus e comece essa conversa com mais segurança.</DialogDescription><div className="dialog-offer"><span>Condição desta página</span><strong>Kit Completo por R$ 19,99</strong></div><DialogClose asChild><Button asChild className="cta-button"><a href="#oferta">Ver a oferta completa <ArrowRight /></a></Button></DialogClose><DialogClose asChild><Button variant="ghost">Agora não</Button></DialogClose></DialogContent></Dialog>
 
-      <Dialog open={upsellOpen} onOpenChange={setUpsellOpen}><DialogContent className="promo-dialog upsell-dialog"><span className="dialog-icon"><Sparkles /></span><DialogTitle>Complete sua jornada</DialogTitle><DialogDescription>Adicione o <strong>Kit de Histórias Protetoras</strong>, com 10 histórias ilustradas e perguntas de reflexão para continuar as conversas no dia a dia.</DialogDescription><div className="dialog-offer"><span>Oferta única pós-compra</span><strong>Por apenas R$ 17,00</strong></div><Button className="cta-button" onClick={() => setUpsellOpen(false)}>Sim, quero adicionar <ArrowRight /></Button><Button variant="ghost" onClick={() => setUpsellOpen(false)}>Não, quero seguir apenas com meu kit</Button></DialogContent></Dialog>
+      <Dialog open={upsellOpen} onOpenChange={setUpsellOpen}><DialogContent className="promo-dialog upsell-dialog"><span className="dialog-icon"><Sparkles /></span><DialogTitle>Complete sua jornada</DialogTitle><DialogDescription>Adicione o <strong>Kit de Histórias Protetoras</strong>, com 10 histórias ilustradas e perguntas de reflexão para continuar as conversas no dia a dia.</DialogDescription><div className="dialog-offer"><span>Oferta única pós-compra</span><strong>Por apenas R$ 9,90</strong></div><Button className="cta-button" onClick={() => setUpsellOpen(false)}>Sim, quero adicionar <ArrowRight /></Button><Button variant="ghost" onClick={() => setUpsellOpen(false)}>Não, quero seguir apenas com meu kit</Button></DialogContent></Dialog>
     </main>
   );
 }

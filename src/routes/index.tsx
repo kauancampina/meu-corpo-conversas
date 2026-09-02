@@ -53,6 +53,10 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+// Links de checkout dos planos
+const CHECKOUT_KIT_BASICO = "https://pay.cakto.com.br/8hy65w5_1079712";
+const CHECKOUT_KIT_COMPLETO = "https://pay.cakto.com.br/3277d5h_1080414";
+
 const pains = [
   "Você sabe que essa conversa é importante, mas não encontra as palavras certas.",
   "Tem receio de assustar, confundir ou falar além do necessário para a idade.",
@@ -139,9 +143,33 @@ function PurchaseActivity() {
   );
 }
 
-function OfferButton({ children, onClick, secondary = false }: { children: React.ReactNode; onClick?: () => void; secondary?: boolean }) {
+function OfferButton({
+  children,
+  onClick,
+  href,
+  secondary = false,
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+  href?: string;
+  secondary?: boolean;
+}) {
+  const className = secondary ? "cta-button cta-secondary" : "cta-button";
+
+  // Botão de checkout: abre o link de pagamento em nova aba
+  if (href) {
+    return (
+      <Button asChild className={className}>
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          {children}
+          <ArrowRight />
+        </a>
+      </Button>
+    );
+  }
+
   return (
-    <Button asChild={!onClick} onClick={onClick} className={secondary ? "cta-button cta-secondary" : "cta-button"}>
+    <Button asChild={!onClick} onClick={onClick} className={className}>
       {onClick ? <span>{children}<ArrowRight /></span> : <a href="#oferta">{children}<ArrowRight /></a>}
     </Button>
   );
@@ -149,7 +177,6 @@ function OfferButton({ children, onClick, secondary = false }: { children: React
 
 function Index() {
   const [exitOpen, setExitOpen] = useState(false);
-  const [upsellOpen, setUpsellOpen] = useState(false);
 
   useEffect(() => {
     let armed = false;
@@ -163,8 +190,6 @@ function Index() {
     document.addEventListener("mouseleave", onLeave);
     return () => { window.clearTimeout(arm); document.removeEventListener("mouseleave", onLeave); };
   }, []);
-
-  const buy = () => setUpsellOpen(true);
 
   return (
     <main>
@@ -244,8 +269,8 @@ function Index() {
       <section className="pricing section-pad" id="oferta">
         <div className="section-heading"><span className="kicker">Escolha como começar</span><h2>Invista hoje em conversas que protegem para sempre.</h2><p>Mais materiais. Mais possibilidades. Um único investimento.</p></div>
         <div className="pricing-grid">
-          <article className="plan basic"><div><span className="plan-type">Material essencial</span><h3>Kit Básico</h3><p>Para dar o primeiro passo com clareza.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> Material pronto para imprimir</li><li><Check /> Cartas e perguntas</li></ul><div className="not-included" aria-label="Não incluído no Kit Básico"><span><X /> 500 Atividades Pedagógicas</span><span><X /> Cartilha Educativa</span><span><X /> Moldes de Brincadeiras Sensoriais</span><span><X /> Bônus exclusivos</span></div><div className="price"><small>Pagamento único</small><span><sup>R$</sup>9<sup>,99</sup></span></div><OfferButton onClick={buy} secondary>Quero o Kit Básico</OfferButton><div className="secure"><span><ShieldCheck /> Compra segura</span><span><Zap /> Acesso imediato</span></div></article>
-          <article className="plan complete"><div className="popular">Mais escolhido</div><div><span className="plan-type">Experiência completa</span><h3>Kit Completo</h3><p>Por apenas R$10 a mais, você leva todo o Kit Completo.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> 500 Atividades Pedagógicas</li><li><Check /> Cartilha Educativa</li><li><Check /> Moldes de Brincadeiras Sensoriais</li><li><Check /> Materiais organizados para facilitar a utilização</li><li><Check /> Bônus exclusivos do Kit Completo</li></ul><div className="price"><small>Tudo por</small><span><sup>R$</sup>19<sup>,99</sup></span><em>TUDO POR R$19,99 — pagamento único</em></div><OfferButton onClick={buy}>Quero o Kit Completo</OfferButton><div className="secure"><span><ShieldCheck /> Compra segura</span><span><Zap /> Acesso imediato</span></div></article>
+          <article className="plan basic"><div><span className="plan-type">Material essencial</span><h3>Kit Básico</h3><p>Para dar o primeiro passo com clareza.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> Material pronto para imprimir</li><li><Check /> Cartas e perguntas</li></ul><div className="not-included" aria-label="Não incluído no Kit Básico"><span><X /> 500 Atividades Pedagógicas</span><span><X /> Cartilha Educativa</span><span><X /> Moldes de Brincadeiras Sensoriais</span><span><X /> Bônus exclusivos</span></div><div className="price"><small>Pagamento único</small><span><sup>R$</sup>9<sup>,99</sup></span></div><OfferButton href={CHECKOUT_KIT_BASICO} secondary>Quero o Kit Básico</OfferButton><div className="secure"><span><ShieldCheck /> Compra segura</span><span><Zap /> Acesso imediato</span></div></article>
+          <article className="plan complete"><div className="popular">Mais escolhido</div><div><span className="plan-type">Experiência completa</span><h3>Kit Completo</h3><p>Por apenas R$10 a mais, você leva todo o Kit Completo.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> 500 Atividades Pedagógicas</li><li><Check /> Cartilha Educativa</li><li><Check /> Moldes de Brincadeiras Sensoriais</li><li><Check /> Materiais organizados para facilitar a utilização</li><li><Check /> Bônus exclusivos do Kit Completo</li></ul><div className="price"><small>Tudo por</small><span><sup>R$</sup>19<sup>,99</sup></span><em>TUDO POR R$19,99 — pagamento único</em></div><OfferButton href={CHECKOUT_KIT_COMPLETO}>Quero o Kit Completo</OfferButton><div className="secure"><span><ShieldCheck /> Compra segura</span><span><Zap /> Acesso imediato</span></div></article>
         </div>
       </section>
 
@@ -273,8 +298,6 @@ function Index() {
       <PurchaseActivity />
 
       <Dialog open={exitOpen} onOpenChange={setExitOpen}><DialogContent className="promo-dialog"><span className="dialog-icon"><Heart /></span><DialogTitle>Antes de ir…</DialogTitle><DialogDescription>Leve agora o Kit Completo com os 3 bônus e comece essa conversa com mais segurança.</DialogDescription><div className="dialog-offer"><span>Condição desta página</span><strong>Kit Completo por R$ 19,99</strong></div><DialogClose asChild><Button asChild className="cta-button"><a href="#oferta">Ver a oferta completa <ArrowRight /></a></Button></DialogClose><DialogClose asChild><Button variant="ghost">Agora não</Button></DialogClose></DialogContent></Dialog>
-
-      <Dialog open={upsellOpen} onOpenChange={setUpsellOpen}><DialogContent className="promo-dialog upsell-dialog"><span className="dialog-icon"><Sparkles /></span><DialogTitle>Complete sua jornada</DialogTitle><DialogDescription>Adicione o <strong>Kit de Histórias Protetoras</strong>, com 10 histórias ilustradas e perguntas de reflexão para continuar as conversas no dia a dia.</DialogDescription><div className="dialog-offer"><span>Oferta única pós-compra</span><strong>Por apenas R$ 9,90</strong></div><Button className="cta-button" onClick={() => setUpsellOpen(false)}>Sim, quero adicionar <ArrowRight /></Button><Button variant="ghost" onClick={() => setUpsellOpen(false)}>Não, quero seguir apenas com meu kit</Button></DialogContent></Dialog>
     </main>
   );
 }

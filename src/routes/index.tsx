@@ -17,7 +17,9 @@ import {
   Users,
 } from "lucide-react";
 
-import kitImage from "@/assets/meu-corpo-kit.png";
+import kitImageAsset from "@/assets/foto-do-produto.png.asset.json";
+
+const kitImage = kitImageAsset.url;
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -146,7 +148,7 @@ function Index() {
         </div>
         <div className="hero-visual">
           <div className="image-backdrop" />
-          <img src={kitImage} alt="Livro Meu Corpo é Meu e cartas para roda de conversa" width={1200} height={1104} />
+          <img src={kitImage} alt="Embalagem do kit Roda de Conversa — Meu Corpo é Meu" width={1536} height={1024} />
           <div className="floating-note"><span>PDF + cartas</span><strong>Pronto para imprimir</strong></div>
         </div>
       </section>

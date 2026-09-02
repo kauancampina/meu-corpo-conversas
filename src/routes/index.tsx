@@ -19,9 +19,15 @@ import {
 } from "lucide-react";
 
 import kitImageAsset from "@/assets/foto-do-produto.png.asset.json";
+import carta1 from "@/assets/carta-1.png.asset.json";
+import carta2 from "@/assets/carta-2.png.asset.json";
+import carta3 from "@/assets/carta-3.png.asset.json";
+import carta4 from "@/assets/carta-4.png.asset.json";
+import carta5 from "@/assets/carta-5.png.asset.json";
 import paulaAsset from "@/assets/paula-rocha.png.asset.json";
 
 const kitImage = kitImageAsset.url;
+const cardSamples = [carta1, carta2, carta3, carta4, carta5].map((a) => a.url);
 const paulaImage = paulaAsset.url;
 import { Button } from "@/components/ui/button";
 import {
@@ -213,6 +219,14 @@ function Index() {
           <div className="image-backdrop" />
           <img src={kitImage} alt="Embalagem do kit Roda de Conversa — Meu Corpo é Meu" width={1536} height={1024} />
           <div className="floating-note"><span>PDF + cartas</span><strong>Pronto para imprimir</strong></div>
+        </div>
+      </section>
+
+      <section className="card-marquee" aria-label="Amostras das cartas do material">
+        <div className="marquee-track">
+          {[...cardSamples, ...cardSamples].map((src, i) => (
+            <img key={i} src={src} alt="Exemplo de carta do material Roda de Conversa" loading="lazy" />
+          ))}
         </div>
       </section>
 

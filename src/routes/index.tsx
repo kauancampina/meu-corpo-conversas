@@ -393,6 +393,7 @@ function Index() {
       <footer className="footer"><div className="brand"><span className="brand-mark"><Heart /></span><span>MEU CORPO<br /><b>É MEU</b></span></div><p>© 2026 Meu Corpo é Meu. Todos os direitos reservados.</p><div><a href="#faq">Dúvidas</a><a href="#oferta">Comprar</a></div></footer>
 
       <PurchaseActivity />
+      <UpsellModal open={upsellOpen} onOpenChange={setUpsellOpen} />
 
       <Dialog open={exitOpen} onOpenChange={setExitOpen}><DialogContent className="promo-dialog"><span className="dialog-icon"><Heart /></span><DialogTitle>Antes de ir…</DialogTitle><DialogDescription>Leve agora o Kit Completo com os 3 bônus e comece essa conversa com mais segurança.</DialogDescription><div className="dialog-offer"><span>Condição desta página</span><strong>Kit Completo por R$ 19,99</strong></div><DialogClose asChild><Button asChild className="cta-button"><a href="#oferta">Ver a oferta completa <ArrowRight /></a></Button></DialogClose><DialogClose asChild><Button variant="ghost">Agora não</Button></DialogClose></DialogContent></Dialog>
     </main>

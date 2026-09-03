@@ -181,8 +181,85 @@ function OfferButton({
   );
 }
 
+function UpsellModal({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
+  const goTo = (url: string) => {
+    onOpenChange(false);
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="upsell-dialog" aria-describedby={undefined}>
+        <button
+          type="button"
+          className="upsell-close"
+          aria-label="Fechar e continuar com o Kit Básico"
+          onClick={() => goTo(CHECKOUT_KIT_BASICO)}
+        >
+          <X aria-hidden="true" />
+        </button>
+        <DialogTitle className="upsell-title">Espera! Antes de escolher o Kit Básico...</DialogTitle>
+        <p className="upsell-lead">Por apenas <strong>R$10 a mais</strong>, você pode levar o Kit Completo e ter acesso a muito mais materiais para trabalhar com seu filho.</p>
+
+        <div className="upsell-compare">
+          <div className="upsell-plan upsell-basic">
+            <h3>Kit Básico</h3>
+            <span className="upsell-price"><sup>R$</sup>9<sup>,99</sup></span>
+            <ul>
+              <li><Check /> Roda de Conversa “Meu Corpo é Meu”</li>
+              <li><Check /> Material principal</li>
+              <li><Check /> Cartas e perguntas</li>
+            </ul>
+          </div>
+          <div className="upsell-plan upsell-complete">
+            <span className="upsell-badge">Mais escolhido</span>
+            <h3>Kit Completo</h3>
+            <span className="upsell-price"><sup>R$</sup>19<sup>,99</sup></span>
+            <ul>
+              <li><Check /> Tudo do Kit Básico</li>
+              <li><Check /> 500 Atividades Pedagógicas</li>
+              <li><Check /> Cartilha Educativa</li>
+              <li><Check /> Moldes de Brincadeiras Sensoriais</li>
+              <li><Check /> Materiais organizados para facilitar a utilização</li>
+              <li><Check /> Bônus exclusivos</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="upsell-bonus">
+          <h3>Você também recebe 3 bônus exclusivos:</h3>
+          <div className="upsell-bonus-list">
+            {[
+              [carta1.url, "Cartaz da Rede de Confiança"],
+              [carta2.url, "Semáforo do Toque"],
+              [carta3.url, "Mini Guia: “E agora, o que eu digo?”"],
+            ].map(([src, title]) => (
+              <div key={String(title)}>
+                <img src={String(src)} alt={`Bônus: ${String(title)}`} loading="lazy" />
+                <span>{String(title)}</span>
+              </div>
+            ))}
+          </div>
+          <strong className="upsell-free">GRÁTIS no Kit Completo</strong>
+        </div>
+
+        <p className="upsell-closing">Por apenas R$10 a mais, você leva muito mais conteúdo para colocar esse aprendizado em prática.</p>
+        <p className="upsell-urgency"><Zap aria-hidden="true" /> Condição especial por tempo limitado</p>
+
+        <Button className="cta-button upsell-cta" onClick={() => goTo(CHECKOUT_KIT_COMPLETO)}>
+          Quero o Kit Completo por R$19,99 <ArrowRight />
+        </Button>
+        <button type="button" className="upsell-decline" onClick={() => goTo(CHECKOUT_KIT_BASICO)}>
+          Não, prefiro continuar com o Kit Básico por R$9,99
+        </button>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 function Index() {
   const [exitOpen, setExitOpen] = useState(false);
+  const [upsellOpen, setUpsellOpen] = useState(false);
 
   // Garante que a página sempre inicie no topo (sem restauração de scroll do navegador)
   useEffect(() => {
@@ -289,7 +366,7 @@ function Index() {
       <section className="pricing section-pad" id="oferta">
         <div className="section-heading"><span className="kicker">Escolha como começar</span><h2>Invista hoje em conversas que protegem para sempre.</h2><p>Mais materiais. Mais possibilidades. Um único investimento.</p></div>
         <div className="pricing-grid">
-          <article className="plan basic"><div><span className="plan-type">Material essencial</span><h3>Kit Básico</h3><p>Para dar o primeiro passo com clareza.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> Material pronto para imprimir</li><li><Check /> Cartas e perguntas</li></ul><div className="not-included" aria-label="Não incluído no Kit Básico"><span><X /> 500 Atividades Pedagógicas</span><span><X /> Cartilha Educativa</span><span><X /> Moldes de Brincadeiras Sensoriais</span><span><X /> Bônus exclusivos</span></div><div className="price"><small>Pagamento único</small><span><sup>R$</sup>9<sup>,99</sup></span></div><OfferButton href={CHECKOUT_KIT_BASICO} secondary>Quero o Kit Básico</OfferButton><div className="secure"><span><ShieldCheck /> Compra segura</span><span><Zap /> Acesso imediato</span></div></article>
+          <article className="plan basic"><div><span className="plan-type">Material essencial</span><h3>Kit Básico</h3><p>Para dar o primeiro passo com clareza.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> Material pronto para imprimir</li><li><Check /> Cartas e perguntas</li></ul><div className="not-included" aria-label="Não incluído no Kit Básico"><span><X /> 500 Atividades Pedagógicas</span><span><X /> Cartilha Educativa</span><span><X /> Moldes de Brincadeiras Sensoriais</span><span><X /> Bônus exclusivos</span></div><div className="price"><small>Pagamento único</small><span><sup>R$</sup>9<sup>,99</sup></span></div><OfferButton onClick={() => setUpsellOpen(true)} secondary>Quero o Kit Básico</OfferButton><div className="secure"><span><ShieldCheck /> Compra segura</span><span><Zap /> Acesso imediato</span></div></article>
           <article className="plan complete"><div className="popular">Mais escolhido</div><div><span className="plan-type">Experiência completa</span><h3>Kit Completo</h3><p>Por apenas R$10 a mais, você leva todo o Kit Completo.</p></div><ul><li><Check /> Roda de Conversa “Meu Corpo é Meu”</li><li><Check /> 500 Atividades Pedagógicas</li><li><Check /> Cartilha Educativa</li><li><Check /> Moldes de Brincadeiras Sensoriais</li><li><Check /> Materiais organizados para facilitar a utilização</li><li><Check /> Bônus exclusivos do Kit Completo</li></ul><div className="price"><small>Tudo por</small><span className="price-pulse"><sup>R$</sup>19<sup>,99</sup></span><em>TUDO POR R$19,99 — pagamento único</em></div><OfferButton href={CHECKOUT_KIT_COMPLETO}>Quero o Kit Completo</OfferButton><div className="secure"><span><ShieldCheck /> Compra segura</span><span><Zap /> Acesso imediato</span></div></article>
         </div>
       </section>
@@ -316,6 +393,7 @@ function Index() {
       <footer className="footer"><div className="brand"><span className="brand-mark"><Heart /></span><span>MEU CORPO<br /><b>É MEU</b></span></div><p>© 2026 Meu Corpo é Meu. Todos os direitos reservados.</p><div><a href="#faq">Dúvidas</a><a href="#oferta">Comprar</a></div></footer>
 
       <PurchaseActivity />
+      <UpsellModal open={upsellOpen} onOpenChange={setUpsellOpen} />
 
       <Dialog open={exitOpen} onOpenChange={setExitOpen}><DialogContent className="promo-dialog"><span className="dialog-icon"><Heart /></span><DialogTitle>Antes de ir…</DialogTitle><DialogDescription>Leve agora o Kit Completo com os 3 bônus e comece essa conversa com mais segurança.</DialogDescription><div className="dialog-offer"><span>Condição desta página</span><strong>Kit Completo por R$ 19,99</strong></div><DialogClose asChild><Button asChild className="cta-button"><a href="#oferta">Ver a oferta completa <ArrowRight /></a></Button></DialogClose><DialogClose asChild><Button variant="ghost">Agora não</Button></DialogClose></DialogContent></Dialog>
     </main>

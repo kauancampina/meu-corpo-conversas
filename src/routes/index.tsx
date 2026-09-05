@@ -221,7 +221,7 @@ function ConfettiBurst({ active }: { active: boolean }) {
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed - 4,
         size: 5 + Math.random() * 7,
-        color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+        color: CONFETTI_COLORS[i % CONFETTI_COLORS.length]!,
         rotation: Math.random() * Math.PI * 2,
         vr: (Math.random() - 0.5) * 0.3,
         shape: Math.floor(Math.random() * 3),

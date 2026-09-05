@@ -181,6 +181,107 @@ function OfferButton({
   );
 }
 
+const CONFETTI_COLORS = ["#7c5cbf", "#f2718a", "#f7c948", "#3fbdb5", "#a78bfa", "#ff9d76"];
+
+function ConfettiBurst({ active }: { active: boolean }) {
+  useEffect(() => {
+    if (!active) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const canvas = document.createElement("canvas");
+    canvas.className = "confetti-canvas";
+    canvas.setAttribute("aria-hidden", "true");
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      canvas.remove();
+      return;
+    }
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.scale(dpr, dpr);
+
+    interface Piece {
+      x: number; y: number; vx: number; vy: number;
+      size: number; color: string; rotation: number; vr: number;
+      shape: number; opacity: number;
+    }
+    const pieces: Piece[] = [];
+    const cx = w / 2;
+    const cy = h * 0.28;
+    for (let i = 0; i < 140; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 6 + Math.random() * 9;
+      pieces.push({
+        x: cx, y: cy,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 4,
+        size: 5 + Math.random() * 7,
+        color: CONFETTI_COLORS[i % CONFETTI_COLORS.length]!,
+        rotation: Math.random() * Math.PI * 2,
+        vr: (Math.random() - 0.5) * 0.3,
+        shape: Math.floor(Math.random() * 3),
+        opacity: 1,
+      });
+    }
+
+    let raf = 0;
+    let frame = 0;
+    const tick = () => {
+      frame++;
+      ctx.clearRect(0, 0, w, h);
+      let alive = false;
+      for (const p of pieces) {
+        p.vy += 0.22;
+        p.vx *= 0.992;
+        p.vy *= 0.992;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rotation += p.vr;
+        if (frame > 70) p.opacity = Math.max(0, p.opacity - 0.03);
+        if (p.opacity > 0 && p.y < h + 30) alive = true;
+        ctx.save();
+        ctx.globalAlpha = p.opacity;
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+        ctx.fillStyle = p.color;
+        if (p.shape === 0) {
+          ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+        } else if (p.shape === 1) {
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size / 2.4, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          ctx.moveTo(0, -p.size / 2);
+          ctx.lineTo(p.size / 2, p.size / 2);
+          ctx.lineTo(-p.size / 2, p.size / 2);
+          ctx.closePath();
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+      if (alive) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        canvas.remove();
+      }
+    };
+    raf = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      canvas.remove();
+    };
+  }, [active]);
+
+  return null;
+}
+
 function UpsellModal({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
   const goTo = (url: string) => {
     onOpenChange(false);
@@ -189,6 +290,7 @@ function UpsellModal({ open, onOpenChange }: { open: boolean; onOpenChange: (ope
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
+      <ConfettiBurst active={open} />
       <DialogContent className="upsell-dialog" aria-describedby={undefined}>
         <button
           type="button"
@@ -199,7 +301,9 @@ function UpsellModal({ open, onOpenChange }: { open: boolean; onOpenChange: (ope
           <X aria-hidden="true" />
         </button>
         <DialogTitle className="upsell-title">Espera! Antes de escolher o Kit Básico...</DialogTitle>
+        <p className="upsell-promo"><Sparkles aria-hidden="true" /> Oferta relâmpago: fechando sua compra agora, você garante todos os materiais do site pela <strong>metade do preço</strong>.</p>
         <p className="upsell-lead">Por apenas <strong>R$10 a mais</strong>, você pode levar o Kit Completo e ter acesso a muito mais materiais para trabalhar com seu filho.</p>
+
 
         <div className="upsell-compare">
           <div className="upsell-plan upsell-basic">

@@ -324,12 +324,28 @@ h2 { font-size: clamp(32px, 4vw, 50px); line-height: 1.08; margin: 10px 0 14px; 
 .upsell-urgency { display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--color-coral); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; }
 .upsell-urgency svg { width: 14px; height: 14px; }
 .upsell-cta { width: 100%; font-size: 15px; padding: 16px 18px; animation: pricePulse 1.8s ease-in-out infinite; }
-.upsell-decline {
-  background: none; border: none; cursor: pointer; margin: 0 auto;
-  color: var(--color-muted-foreground); font-size: 12px; text-decoration: underline; text-underline-offset: 3px;
-  padding: 8px 12px; min-height: 36px;
+.upsell-promo {
+  display: block;
+  background: var(--color-accent); color: var(--color-accent-foreground);
+  border-radius: 14px; padding: 10px 14px; margin: 0;
+  font-size: 12.5px; font-weight: 700; line-height: 1.4; text-align: center;
+  box-shadow: 0 8px 20px color-mix(in oklab, var(--color-accent) 35%, transparent);
 }
-.upsell-decline:hover { color: var(--color-foreground); }
+.upsell-promo svg { width: 15px; height: 15px; vertical-align: -2px; margin-right: 6px; }
+.upsell-promo strong { text-transform: uppercase; }
+.confetti-canvas {
+  position: fixed; inset: 0; width: 100vw; height: 100vh;
+  pointer-events: none; z-index: 9999;
+}
+.upsell-decline {
+  cursor: pointer; width: 100%; min-height: 48px;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  background: var(--color-card); color: var(--color-muted-foreground);
+  border: 1.5px solid var(--color-border); border-radius: 999px;
+  font-size: 13.5px; font-weight: 700; padding: 12px 18px;
+  transition: border-color .15s ease, color .15s ease, background .15s ease;
+}
+.upsell-decline:hover { color: var(--color-foreground); border-color: var(--color-primary); background: var(--color-soft-blue); }
 @media (max-width: 560px) {
   .upsell-dialog { padding: 24px 14px 18px; border-radius: 22px; }
   .upsell-compare { grid-template-columns: 1fr; }

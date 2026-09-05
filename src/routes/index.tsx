@@ -405,7 +405,6 @@ function Index() {
         <div className="hero-visual">
           <div className="image-backdrop" />
           <img src={kitImage} alt="Embalagem do kit Roda de Conversa — Meu Corpo é Meu" width={1536} height={1024} />
-          <div className="floating-note"><span>PDF + cartas</span><strong>Pronto para imprimir</strong></div>
         </div>
       </section>
 

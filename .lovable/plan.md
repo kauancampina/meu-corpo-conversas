@@ -28,3 +28,4 @@ Mover o bloco de planos (Kit Básico R$9,99 e Kit Completo R$19,99) para imediat
 - `bun run build` deve passar.
 - Verificar no preview desktop e mobile se a oferta aparece logo abaixo do hero e acima da esteira de cartas.
 - Confirmar que o scroll para `#oferta` ainda funciona e que os links de checkout continuam sendo tags `<a>`.
+- Confirmar que o balão "PDF + cartas / Pronto para imprimir" não aparece mais sobre a imagem do produto.

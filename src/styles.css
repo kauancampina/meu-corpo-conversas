@@ -325,13 +325,13 @@ h2 { font-size: clamp(32px, 4vw, 50px); line-height: 1.08; margin: 10px 0 14px; 
 .upsell-urgency svg { width: 14px; height: 14px; }
 .upsell-cta { width: 100%; font-size: 15px; padding: 16px 18px; animation: pricePulse 1.8s ease-in-out infinite; }
 .upsell-promo {
-  display: flex; align-items: center; justify-content: center; gap: 8px;
+  display: block;
   background: var(--color-accent); color: var(--color-accent-foreground);
   border-radius: 14px; padding: 10px 14px; margin: 0;
   font-size: 12.5px; font-weight: 700; line-height: 1.4; text-align: center;
   box-shadow: 0 8px 20px color-mix(in oklab, var(--color-accent) 35%, transparent);
 }
-.upsell-promo svg { width: 16px; height: 16px; flex: none; }
+.upsell-promo svg { width: 15px; height: 15px; vertical-align: -2px; margin-right: 6px; }
 .upsell-promo strong { text-transform: uppercase; }
 .confetti-canvas {
   position: fixed; inset: 0; width: 100vw; height: 100vh;

@@ -5,6 +5,7 @@ Mover o bloco de planos (Kit Básico R$9,99 e Kit Completo R$19,99) para imediat
 
 ## O que será alterado
 - Em `src/routes/index.tsx`, a `<section className="pricing section-pad" id="oferta">` (linhas ~470-476) será recortada e colada logo após o fechamento da `<section className="hero" id="inicio">` (após a linha ~410).
+- Remover o balão flutuante `<div className="floating-note">` que aparece sobre a imagem do produto no hero, deixando apenas a foto do produto.
 - A ordem resultante será:
   1. Countdown (fixo no topo)
   2. Hero

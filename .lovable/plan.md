@@ -1,4 +1,4 @@
-# Reposicionar a seção de oferta para logo após o hero
+# Reposicionar a seção de oferta para logo após o hero e remover balão do produto
 
 ## Objetivo
 Mover o bloco de planos (Kit Básico R$9,99 e Kit Completo R$19,99) para imediatamente após a seção hero, sem redesenhar nada.
